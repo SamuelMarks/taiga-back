@@ -97,7 +97,7 @@ class ProjectAdmin(admin.ModelAdmin):
                        "logo",
                        ("created_date", "modified_date"))
         }),
-        (_("Privacity"), {
+        (_("privacy"), {
             "fields": (("owner", "blocked_code"),
                        "is_private",
                        ("anon_permissions", "public_permissions"),
