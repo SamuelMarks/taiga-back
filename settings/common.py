@@ -118,7 +118,7 @@ LANGUAGES = [
     ("ko", "한국어"),  # Korean
     #("lb", "Lëtzebuergesch"),  # Luxembourgish
     #("lt", "Lietuvių"),  # Lithuanian
-    #("lv", "Latviešu"),  # Latvian
+    ("lv", "Latviešu"),  # Latvian
     #("mk", "Македонски"),  # Macedonian
     #("ml", "മലയാളം"),  # Malayalam
     #("mn", "Монгол"),  # Mongolian
@@ -259,8 +259,8 @@ TEMPLATES = [
 ]
 
 
-MIDDLEWARE_CLASSES = [
-    "taiga.base.middleware.cors.CoorsMiddleware",
+MIDDLEWARE = [
+    "taiga.base.middleware.cors.CorsMiddleware",
     "taiga.events.middleware.SessionIDMiddleware",
 
     # Common middlewares
@@ -470,9 +470,13 @@ APP_EXTRA_EXPOSE_HEADERS = [
 ]
 
 DEFAULT_PROJECT_TEMPLATE = "scrum"
+# Setting DEFAULT_PROJECT_SLUG_PREFIX to false removes the username from project slug
+DEFAULT_PROJECT_SLUG_PREFIX = True
 PUBLIC_REGISTER_ENABLED = False
 # None or [] values in USER_EMAIL_ALLOWED_DOMAINS means allow any domain
 USER_EMAIL_ALLOWED_DOMAINS = None
+
+PRIVATE_USER_PROFILES = False
 
 SEARCHES_MAX_RESULTS = 150
 
@@ -598,3 +602,11 @@ if "test" in sys.argv:
     print ("\033[1;91mNo django tests.\033[0m")
     print ("Try: \033[1;33mpy.test\033[0m")
     sys.exit(0)
+
+# Configuration for sending notifications
+NOTIFICATIONS_CUSTOM_FILTER = False
+
+# MDRENDER
+MDRENDER_CACHE_ENABLE = True
+MDRENDER_CACHE_MIN_SIZE = 40
+MDRENDER_CACHE_TIMEOUT = 86400

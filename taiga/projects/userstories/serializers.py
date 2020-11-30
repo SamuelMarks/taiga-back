@@ -71,6 +71,7 @@ class UserStoryListSerializer(ProjectExtraInfoSerializerMixin,
     team_requirement = Field()
     generated_from_issue = Field(attr="generated_from_issue_id")
     generated_from_task = Field(attr="generated_from_task_id")
+    from_task_ref = Field()
     external_reference = Field()
     tribe_gig = Field()
     version = Field()
@@ -212,10 +213,17 @@ class UserStoryNestedSerializer(ProjectExtraInfoSerializerMixin,
     version = Field()
     is_blocked = Field()
     blocked_note = Field()
+    backlog_order = Field()
     sprint_order = Field()
+    kanban_order = Field()
 
+    epics = MethodField()
     points = MethodField()
     total_points = MethodField()
+
+    def get_epics(self, obj):
+        assert hasattr(obj, "epics_attr"), "instance must have a epics_attr attribute"
+        return obj.epics_attr
 
     def get_points(self, obj):
         assert hasattr(obj, "role_points_attr"), "instance must have a role_points_attr attribute"
